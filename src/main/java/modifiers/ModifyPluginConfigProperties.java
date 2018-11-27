@@ -35,6 +35,13 @@ public class ModifyPluginConfigProperties {
                 hiveKerberosPrincipal = "hive@PENTAHO.NET";
             }
 
+            if (ShimValues.getHadoopVendor().equalsIgnoreCase("cdh")) {
+                if (Integer.valueOf(ShimValues.getHadoopVendorVersion()) == 515 || Integer.valueOf(ShimValues.getHadoopVendorVersion()) == 601 ) {
+                    devuserKerberosPrincipal = "devuser@PENTAHO.NET";
+                    hiveKerberosPrincipal = "hive@PENTAHO.NET";
+                }
+            }
+
             //determine if shim is using impersonation and modify it accordingly
             if (PropertyHandler.getPropertyFromFile(configPropertiesFile,
                     "pentaho.authentication.default.mapping.impersonation.type") == null) {
